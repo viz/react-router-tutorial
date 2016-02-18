@@ -1,17 +1,23 @@
+// modules/Repos.js
+
 import React from 'react'
 import NavLink from './NavLink'
+import {routeActions} from 'react-router-redux'
 
 export default React.createClass({
+
   contextTypes: {
-    router: React.PropTypes.object
+    router: React.PropTypes.object,
+    store: React.PropTypes.object
   },
 
   handleSubmit(event) {
-    event.preventDefault()
-    const userName = event.target.elements[0].value
-    const repo = event.target.elements[1].value
-    const path = `/repos/${userName}/${repo}`
-    this.context.router.push(path)
+    event.preventDefault();
+    const userName = event.target.elements[0].value;
+    const repo = event.target.elements[1].value;
+    const path = `/repos/${userName}/${repo}`;
+    // this.context.router.push(path); // react-router approach
+    this.context.store.dispatch(routeActions.push(path)); // react-router-redux approach
   },
 
   render() {
